@@ -175,7 +175,7 @@ jobs:
         run: cat backend.log
 
       - name: Wait for Phoenix backend to be ready
-        run: wait-on http://localhost:4000/gql --timeout=120000
+        run: wait-on http://127.0.0.1:4000/gql --timeout=120000
 
       - name: Debug workspace
         run: ls -la
