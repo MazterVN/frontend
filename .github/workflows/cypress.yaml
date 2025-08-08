@@ -170,7 +170,7 @@ jobs:
 
       - name: Wait for Phoenix backend to be ready
         run: |
-          wait-on http://127.0.0.1:4000 --timeout=60000 || (
+          wait-on http://localhost:4000 --timeout=60000 || (
             echo "❌ Backend log:"
             cat backend/backend.log || echo "No backend.log found"
             exit 1
