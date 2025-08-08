@@ -162,20 +162,19 @@ jobs:
           mix deps.get
           mix deps.compile
 
-      # - name: Start Phoenix backend (in background)
-      #   working-directory: backend
-      #   run: |
-      #     mix phx.server > backend.log 2>&1 &
-      #     echo $! > phoenix.pid
-      - name: Start Backend
-        run: mix phx.server > backend.log 2>&1 &
-
-      - name: Debug Log if Fail
-        if: failure()
-        run: cat backend.log
+      - name: Start Phoenix backend (in background)
+        working-directory: backend
+        run: |
+          iex -S mix phx.server > backend.log 2>&1 &
+          echo $! > phoenix.pid
 
       - name: Wait for Phoenix backend to be ready
-        run: wait-on http://127.0.0.1:4000/gql --timeout=120000
+        run: |
+          wait-on http://127.0.0.1:4000 --timeout=60000 || (
+            echo "❌ Backend log:"
+            cat backend/backend.log || echo "No backend.log found"
+            exit 1
+          )
 
       - name: Debug workspace
         run: ls -la
