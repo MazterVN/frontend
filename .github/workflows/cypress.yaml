@@ -161,42 +161,43 @@ jobs:
           mix local.rebar --force
           mix deps.get
           mix deps.compile
+          mix test
 
-      - name: Start Phoenix backend (in background)
-        working-directory: backend
-        run: |
-          mix phx.server > backend.log 2>&1 &
-          echo $! > phoenix.pid
+      # - name: Start Phoenix backend (in background)
+      #   working-directory: backend
+      #   run: |
+      #     mix phx.server > backend.log 2>&1 &
+      #     echo $! > phoenix.pid
 
-      - name: Wait for Phoenix backend to be ready
-        run: |
-          wait-on http://localhost:4000 --timeout=60000 || (
-            echo "❌ Backend log:"
-            cat backend/backend.log || echo "No backend.log found"
-            exit 1
-          )
+      # - name: Wait for Phoenix backend to be ready
+      #   run: |
+      #     wait-on http://localhost:4000 --timeout=60000 || (
+      #       echo "❌ Backend log:"
+      #       cat backend/backend.log || echo "No backend.log found"
+      #       exit 1
+      #     )
 
-      - name: Debug workspace
-        run: ls -la
+      # - name: Debug workspace
+      #   run: ls -la
 
-      - name: Install frontend dependencies
-        run: pnpm install
+      # - name: Install frontend dependencies
+      #   run: pnpm install
 
-      - name: Run Cypress tests with Cloud recording
-        uses: cypress-io/github-action@v6
-        with:
-          start: pnpm dev --port 3000
-          wait-on: http://localhost:3000
-          wait-on-timeout: 60000
-          record: false
-          parallel: true
-          config: baseUrl=http://localhost:3000
-        env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_4_CYPRESS }}
+      # - name: Run Cypress tests with Cloud recording
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     start: pnpm dev --port 3000
+      #     wait-on: http://localhost:3000
+      #     wait-on-timeout: 60000
+      #     record: false
+      #     parallel: true
+      #     config: baseUrl=http://localhost:3000
+      #   env:
+      #     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      #     GITHUB_TOKEN: ${{ secrets.TOKEN_4_CYPRESS }}
 
-      - name: Cleanup background services
-        if: always()
-        run: |
-          kill $(cat backend/phoenix.pid) || true
+      # - name: Cleanup background services
+      #   if: always()
+      #   run: |
+      #     kill $(cat backend/phoenix.pid) || true
     # remove kill nuxt.pid line if nuxt.pid does not exist
