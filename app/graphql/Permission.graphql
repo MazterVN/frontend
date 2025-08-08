@@ -1,0 +1,26 @@
+mutation GeneratePermissions {
+  generatePermissions
+}
+query ListPermissionDropdown($datamanager: DatamanagerInput) {
+  listPermissions(datamanager: $datamanager) {
+    count
+    results {
+      id
+      fullPermission
+    }
+  }
+}
+
+query ListPermission($datamanager: DatamanagerInput) {
+  listPermissions(datamanager: $datamanager) {
+    count
+    results {
+      id
+      resource
+      action
+      actionGroup
+      description
+      docPage
+    }
+  }
+}

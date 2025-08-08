@@ -1,0 +1,58 @@
+query ListDropReason($datamanager: DatamanagerInput) {
+  listDropReasons(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      insertedAt
+    }
+  }
+}
+
+query ListDropReasonDropdown($datamanager: DatamanagerInput) {
+  listDropReasons(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+query EditDropReason($id: ID!) {
+  editDropReason(id: $id) {
+    id
+    name
+    language
+    dropReasons {
+      id
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedDropReason($input: CreateRelatedDropReasonInput!) {
+  createRelatedDropReason(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedDropReason($id: ID!, $input: UpdateRelatedDropReasonInput!) {
+  updateRelatedDropReason(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

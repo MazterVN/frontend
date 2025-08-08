@@ -1,0 +1,123 @@
+query ListStudentServiceWithAttendance($timetableId: ID!, $filterDate: Date!) {
+    listStudentServiceWithAttendance(
+        timetableId: $timetableId
+        filterDate: $filterDate
+    ) {
+        results {
+            id
+            student {
+                id
+                s3ProfileUri
+                name
+                latin
+                localizedGender
+            }
+            attendance {
+                id
+                timetableId
+                studentServiceId
+                datetime
+                isAbsent
+                type
+                lateTime
+                note
+                draftAt
+                checked
+            }
+        }
+    }
+}
+
+query ReadStudentAttendanceWithGenerate(
+    $startDate: Date!
+    $endDate: Date!
+    $timetableIds: [ID!]!
+    $studentServiceIds: [ID!]!
+) {
+    readStudentAttendanceWithGenerate(
+        startDate: $startDate
+        endDate: $endDate
+        timetableIds: $timetableIds
+        studentServiceIds: $studentServiceIds
+    ) {
+        id
+        timetableId
+        studentServiceId
+        datetime
+        isAbsent
+        type
+        lateTime
+        note
+        attachments {
+            id
+            bucket
+            key
+            note
+        }
+        draftAt
+        checked
+        student {
+            id
+            s3ProfileUri
+            name
+            latin
+            localizedGender
+        }
+        timetable {
+            id
+            subjectCalc
+            timeRange
+        }
+    }
+}
+
+query ListStudentServiceWithAttendanceReport(
+    $datamanager: DatamanagerInput
+    $startDate: Date
+    $endDate: Date
+) {
+    listStudentServices(
+        datamanager: $datamanager
+        startDate: $startDate
+        endDate: $endDate
+    ) {
+        count
+        results {
+            id
+            studyYear {
+                value
+            }
+            serviceName {
+                nameLocalized
+            }
+            student {
+                name
+                latin
+                s3ProfileUri
+            }
+            attendanceAbsent
+            attendanceAbsentExcused
+            attendanceLate
+        }
+    }
+}
+
+mutation UpdateRelatedStudentAttendance(
+    $id: ID!
+    $input: UpdateRelatedStudentAttendanceInput!
+) {
+    updateRelatedStudentAttendance(id: $id, input: $input) {
+        errors {
+            message
+            fields
+        }
+        result {
+            id
+        }
+    }
+}
+mutation BatchUpdateRelatedStudentAttendance(
+    $input: BatchUpdateRelatedStudentAttendanceInput!
+) {
+    batchUpdateRelatedStudentAttendance(input: $input)
+}

@@ -1,0 +1,53 @@
+# | 'student-card-66x97'
+# | 'student-card-54x85'
+query ExportStudentCardSixSixByNineSevenMm(
+    $studyYearId: ID!
+    $serviceDetailIds: [ID!]!
+    $studentIds: [ID!]!
+) {
+    exportStudentCardSixSixByNineSevenMm(
+        isActive: true
+        studyYearId: $studyYearId
+        serviceDetailIds: $serviceDetailIds
+        studentIds: $studentIds
+    )
+}
+
+query ExportStudentCardFiveFourByEightyFiveMm(
+    $studyYearId: ID!
+    $serviceDetailIds: [ID!]!
+    $studentIds: [ID!]!
+) {
+    exportStudentCardFiveFourByEightyFiveMm(
+        isActive: true
+        studyYearId: $studyYearId
+        serviceDetailIds: $serviceDetailIds
+        studentIds: $studentIds
+    )
+}
+
+query ExportNewStudentInfo(
+    $studyYearId: ID!
+    $serviceDetailIds: [ID!]!
+    $studentIds: [ID!]!
+) {
+    exportNewStudentInfo(
+        isActive: true
+        studyYearId: $studyYearId
+        serviceDetailIds: $serviceDetailIds
+        studentIds: $studentIds
+    )
+}
+
+query ExportCertificateOfEducation(
+    $studyYearId: ID!
+    $serviceDetailIds: [ID!]!
+    $studentServiceIds: [ID!]!
+) {
+    exportCertificateOfEducation(
+        isActive: true
+        studyYearId: $studyYearId
+        serviceDetailIds: $serviceDetailIds
+        studentServiceIds: $studentServiceIds
+    )
+}

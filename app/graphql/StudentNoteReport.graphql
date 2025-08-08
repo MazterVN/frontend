@@ -1,0 +1,67 @@
+query ListStudentNoteReport(
+  $datamanager: DatamanagerInput
+  $startDate: Date
+  $endDate: Date
+) {
+  listStudentNoteReport(
+    datamanager: $datamanager
+    startDate: $startDate
+    endDate: $endDate
+  ) {
+    count
+    results {
+      id
+      studyYear {
+        nameLocalized
+      }
+      serviceName {
+        nameLocalized
+      }
+      student {
+        name
+        latin
+        i18nGender {
+          nameLocalized
+        }
+        s3ProfileUri
+      }
+      studentNotePerformanceImprovementLetter
+      studentNoteWarningLetter
+      studentNoteContract
+      studentNoteOther
+    }
+  }
+}
+
+query GetStudentNoteReport($id: ID!, $startDate: Date, $endDate: Date) {
+  getStudentNoteReport(id: $id, startDate: $startDate, endDate: $endDate) {
+    id
+    studyYear {
+      nameLocalized
+    }
+    serviceName {
+      nameLocalized
+    }
+    student {
+      name
+      latin
+      i18nGender {
+        nameLocalized
+      }
+      s3ProfileUri
+    }
+    studentNotePerformanceImprovementLetter
+    studentNoteWarningLetter
+    studentNoteContract
+    studentNoteOther
+    attachments {
+      id
+      studentNote {
+        id
+        title
+      }
+      uri
+      typeNameLocalized
+    }
+  }
+}

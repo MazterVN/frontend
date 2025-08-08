@@ -1,0 +1,12 @@
+query ExportBioCheckList(
+    $studyYearId: ID!
+    $serviceDetailIds: [ID!]!
+    $studentServiceIds: [ID!]!
+) {
+    exportBioCheckList(
+        isActive: true
+        studyYearId: $studyYearId
+        serviceDetailIds: $serviceDetailIds
+        studentServiceIds: $studentServiceIds
+    )
+}

@@ -1,0 +1,98 @@
+<head>
+  <meta charset="utf-8" />
+  <style>
+    {{asset "./assets/style.css"}}
+  </style>
+</head>
+
+<body>
+  <table class="">
+    <thead>
+      <tr>
+        <th
+          class="font-cambria-moul line-break text-center text-blue"
+          colspan="8"
+        >
+          <div>
+            តារាងចំណាត់ថ្នាក់{{name}}
+          </div>
+          <div>
+            ថ្នាក់ទីៈ
+            {{serviceDetail.serviceNameKm}}
+            ឆ្នាំសិក្សា
+            {{studyYearNameKm}}
+          </div>
+        </th>
+      </tr>
+      <tr>
+        <th class="font-content" style="width: 10px"> ល.រ </th>
+        <th class="font-content" style="width: 150px;"> គោត្តនាម-នាម </th>
+        <th class="font-content text-center" style="width: 100px;"> ភេទ </th>
+        <th class="font-content text-center" style="width: 200px;">
+          <span>
+            {{#if isAnnual}}
+              មធ្យមភាគប្រចាំឆមាស
+            {{else}}
+              មធ្យមភាគប្រឡងឆមាស
+            {{/if}}
+          </span>
+        </th>
+        <th class="font-content text-center" style="width: 200px">
+          <span>
+            មធ្យមភាគខែប្រចាំឆមាស
+          </span>
+        </th>
+        <th class="font-content text-center" style="width: 200px">
+          {{#if isAnnual}}
+            មធ្យមភាគប្រចាំឆ្នាំ
+          {{else}}
+            មធ្យមភាគប្រចាំឆមាស
+          {{/if}}
+        </th>
+        <th class="font-content text-center" style="width: 200px">
+          ចំណាត់ថ្នាក់
+        </th>
+        <th class="font-content text-center" style="width: 200px">
+          និទ្ទេស
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each studentServices}}
+        <tr>
+          <td class="font-content" data-cell-type="number">
+            {{inc @index}}
+          </td>
+          <td class="font-content">
+            {{student.name}}
+          </td>
+          <td class="font-content text-center">
+            {{student.i18nGender.nameKm}}
+          </td>
+          <td
+            class="font-content text-center"
+            data-cell-type="number"
+          >{{decimalToFixed semesterGpa 2}}</td>
+          <td
+            class="font-content text-center"
+            data-cell-type="number"
+          >{{decimalToFixed monthlyAvgGpa 2}}</td>
+          <td
+            class="font-content text-center"
+            data-cell-type="number"
+          >{{decimalToFixed annualAvgGpa 2}}</td>
+
+          <td
+            class="font-content text-center"
+            data-cell-type="number"
+          >{{annualRank}}</td>
+          <td
+            class="font-content text-center"
+            data-cell-type="number"
+          >{{annualGradeLevelName}}</td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+
+</body>

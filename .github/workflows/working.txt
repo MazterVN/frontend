@@ -1,0 +1,197 @@
+name: E2E Tests (Frontend + Backend)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgres:14
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: css_db_prod
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      MIX_ENV: test
+      DATABASE_URL: postgres://postgres:postgres@localhost:5432/css_db_prod
+      PORT: 4000 # Ensure Phoenix binds to this port
+      CLIENT_ORIGIN_URL: ${{ secrets.CLIENT_ORIGIN_URL }}
+      AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ${{ secrets.AWS_REGION }}
+      ASSET_HOST: ${{ secrets.ASSET_HOST }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_JWT_SECRET: ${{ secrets.SUPABASE_JWT_SECRET }}
+      AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
+      AUTH0_AUDIENCE: ${{ secrets.AUTH0_AUDIENCE }}
+      AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
+      AUTH0_CLIENT_SECRET: ${{ secrets.AUTH0_CLIENT_SECRET }}
+      AUTH0_SCOPE: ${{ secrets.AUTH0_SCOPE }}
+      SECRET_KEY_BASE: ${{ secrets.SECRET_KEY_BASE }}
+      SMS_ACTOR_ID: ${{ secrets.SMS_ACTOR_ID }}
+      AUTH0_REDIRECT_URI: ${{ secrets.AUTH0_REDIRECT_URI }}
+      IMAGE_CDN: ${{ secrets.IMAGE_CDN }}
+      PHX_HOST: ${{ secrets.PHX_HOST }}
+      CLIENT_ORIGIN_URL2: ${{ secrets.CLIENT_ORIGIN_URL2 }}
+      USER_EMAIL: ${{ secrets.USER_EMAIL }}
+      USER_PASSWORD: ${{ secrets.USER_PASSWORD }}
+      CYPRESS_DOMAIN: ${{ secrets.CYPRESS_DOMAIN }}
+      MAX_BOT_CONCURRENCY: ${{ secrets.MAX_BOT_CONCURRENCY }}
+      WEBHOOK_HOST: ${{ secrets.WEBHOOK_HOST }}
+      WEBHOOK_PORT: ${{ secrets.WEBHOOK_PORT }}
+      WEBHOOK_LOCAL_PORT: ${{ secrets.WEBHOOK_LOCAL_PORT }}
+      TEMP_BUCKET: ${{ secrets.TEMP_BUCKET }}
+      TEST_USER_ID: ${{ secrets.TEST_USER_ID }}
+      CLOUDWARE_NOTIFIER_BOT_TOKEN: ${{ secrets.CLOUDWARE_NOTIFIER_BOT_TOKEN }}
+      CLOUDWARE_NOTIFIER_BOT_CHAT_ID: ${{ secrets.CLOUDWARE_NOTIFIER_BOT_CHAT_ID }}
+      NOTIFY_BOT_TOKEN: ${{ secrets.NOTIFY_BOT_TOKEN }}
+      GQL_HOST: ${{ secrets.GQL_HOST }}
+      NUXT_PUBLIC_GQL_HOST: ${{ secrets.NUXT_PUBLIC_GQL_HOST }}
+      NUXT_OAUTH_AUTH0_CLIENT_ID: ${{ secrets.NUXT_OAUTH_AUTH0_CLIENT_ID }}
+      NUXT_OAUTH_AUTH0_CLIENT_SECRET: ${{ secrets.NUXT_OAUTH_AUTH0_CLIENT_SECRET }}
+      NUXT_OAUTH_AUTH0_DOMAIN: ${{ secrets.NUXT_OAUTH_AUTH0_DOMAIN }}
+      NUXT_OAUTH_AUTH0_AUDIENCE: ${{ secrets.NUXT_OAUTH_AUTH0_AUDIENCE }}
+      NUXT_SESSION_PASSWORD: ${{ secrets.NUXT_SESSION_PASSWORD }}
+      NUXT_PUBLIC_S3_SERVER: ${{ secrets.NUXT_PUBLIC_S3_SERVER }}
+      NUXT_PUBLIC_IMAGE_CDN: ${{ secrets.NUXT_PUBLIC_IMAGE_CDN }}
+      NUXT_PUBLIC_API_HOST: ${{ secrets.NUXT_PUBLIC_API_HOST }}
+      NUXT_PUBLIC_TELEGRAM_BOT_USERNAME: ${{ secrets.NUXT_PUBLIC_TELEGRAM_BOT_USERNAME }}
+      NUXT_PUBLIC_PLACEHOLDER_IMG: ${{ secrets.NUXT_PUBLIC_PLACEHOLDER_IMG }}
+      NUXT_PUBLIC_WS_HOST: ${{ secrets.NUXT_PUBLIC_WS_HOST }}
+      NODE_OPTIONS: ${{ secrets.NODE_OPTIONS }}
+      CY_BASE_URL: ${{ secrets.CY_BASE_URL }}
+      CY_VIEWPORT: ${{ secrets.CY_VIEWPORT }}
+      CY_TESTER_USER: ${{ secrets.CY_TESTER_USER }}
+      CY_TESTER_PASS: ${{ secrets.CY_TESTER_PASS }}
+      CY_SANDBOX_URL: ${{ secrets.CY_SANDBOX_URL }}
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      TEST_USER: ${{ secrets.TEST_USER }}
+      TEST_PASS: ${{ secrets.TEST_PASS }}
+      SYNCFUSION_LICENSE: ${{ secrets.SYNCFUSION_LICENSE }}
+
+    steps:
+      - name: Checkout frontend repo
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.14
+          cache: "pnpm"
+
+      - name: Install wait-on globally
+        run: pnpm add -g wait-on
+
+      - name: Checkout backend repo
+        uses: actions/checkout@v4
+        with:
+          repository: nakvanna/backend-for-test
+          token: ${{ secrets.BACKEND_TOKEN }}
+          path: backend
+
+      - name: Create .test.env file
+        working-directory: backend
+        run: echo "" >> .test.env #Fake create .test.env
+
+      - name: Set up Elixir
+        uses: erlef/setup-beam@v1
+        with:
+          elixir-version: 1.18.2
+          otp-version: 27.0.0
+
+      - name: Install PostgreSQL client
+        run: sudo apt-get install -y postgresql-client
+
+      - name: Restore database
+        run: |
+          git clone https://x-access-token:${{ secrets.DUMP_REPO_TOKEN }}@github.com/nakvanna/database-dump.git database-dump
+          cp database-dump/css_db_prod.sql .
+          pg_restore --no-owner --no-privileges --clean --if-exists --verbose \
+            --host=localhost \
+            --username=postgres \
+            --dbname=css_db_prod \
+            css_db_prod.sql
+        env:
+          PGPASSWORD: postgres
+
+      - name: Cache Elixir deps
+        uses: actions/cache@v4
+        with:
+          path: backend/deps
+          key: ${{ runner.os }}-mix-deps-${{ hashFiles('backend/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-deps-
+
+      - name: Cache Elixir build
+        uses: actions/cache@v4
+        with:
+          path: backend/_build
+          key: ${{ runner.os }}-mix-build-${{ hashFiles('backend/mix.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-mix-build-
+
+      - name: Compile and setup backend
+        working-directory: backend
+        run: |
+          mix local.hex --force
+          mix local.rebar --force
+          mix deps.get
+          mix deps.compile
+
+      - name: Start Phoenix backend (in background)
+        working-directory: backend
+        run: |
+          mix phx.server > ../backend.log 2>&1 &
+          echo $! > ../phoenix.pid
+
+      - name: Wait for Phoenix backend to be ready
+        run: |
+          wait-on http://127.0.0.1:4000 --timeout=60000 || (
+            echo "❌ Backend log:"
+            cat backend.log || echo "No backend.log found"
+            exit 1
+          )
+
+      - name: Debug workspace
+        run: ls -la
+
+      - name: Install frontend dependencies
+        run: pnpm install
+
+      - name: Start Nuxt frontend (in background)
+        run: |
+          pnpm dev --port 3000 --host 127.0.0.1 > nuxt.log 2>&1 &
+          echo $! > nuxt.pid
+
+      - name: Wait for Nuxt frontend to be ready
+        run: wait-on http://127.0.0.1:3000 --timeout=60000
+
+      - name: Run Cypress tests
+        run: pnpm cypress run
+        env:
+          CYPRESS_BASE_URL: http://127.0.0.1:3000
+
+      - name: Cleanup background services
+        if: always()
+        run: |
+          kill $(cat phoenix.pid) || true
+          kill $(cat nuxt.pid) || true

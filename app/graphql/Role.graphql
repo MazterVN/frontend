@@ -1,0 +1,44 @@
+mutation CreateRelatedUpsertRole($input: CreateRelatedUpsertRoleInput!) {
+  createRelatedUpsertRole(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListRoleDropdown($datamanager: DatamanagerInput) {
+  listRoles(datamanager: $datamanager) {
+    count
+    results {
+      id
+      name
+    }
+  }
+}
+
+query ListRole($datamanager: DatamanagerInput) {
+  listRoles(datamanager: $datamanager) {
+    count
+    results {
+      id
+      name
+      description
+    }
+  }
+}
+
+query EditRole($id: ID!) {
+  editRole(id: $id) {
+    id
+    name
+    description
+    rolePermissions {
+      id
+      permissionId
+    }
+  }
+}

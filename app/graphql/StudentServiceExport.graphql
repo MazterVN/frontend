@@ -1,0 +1,10 @@
+query ExportNewStudentList(
+    $serviceDetailIds: [ID!]!
+    $studentServiceIds: [ID!]!
+) {
+    exportNewStudentList(
+        isActive: true
+        serviceDetailIds: $serviceDetailIds
+        studentServiceIds: $studentServiceIds
+    )
+}

@@ -1,0 +1,62 @@
+mutation CreateRelatedUpsertBuildingRoom(
+  $input: CreateRelatedUpsertBuildingRoomInput!
+) {
+  createRelatedUpsertBuildingRoom(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListBuildingRoom($datamanager: DatamanagerInput) {
+  listBuildingRooms(datamanager: $datamanager) {
+    count
+    results {
+      id
+      building
+      floor
+      roomNo
+      seatCount
+      insertedAt
+    }
+  }
+}
+
+query ListBuildingRoomDropdown($datamanager: DatamanagerInput) {
+  listBuildingRooms(datamanager: $datamanager) {
+    count
+    results {
+      id
+      fullBuildingRoomNameCalc
+    }
+  }
+}
+
+query ListBuildingRoomSeatDropdown($datamanager: DatamanagerInput) {
+  listBuildingRoomSeats(datamanager: $datamanager) {
+    count
+    results {
+      id
+      seatNo
+    }
+  }
+}
+
+query EditBuildingRoom($id: ID!) {
+  editBuildingRoom(id: $id) {
+    id
+    building
+    floor
+    roomNo
+    buildingRoomSeats {
+      id
+      row
+      column
+      seatNo
+    }
+  }
+}

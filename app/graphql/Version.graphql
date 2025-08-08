@@ -1,0 +1,38 @@
+mutation CreateUpsertVersion($input: CreateUpsertVersionInput!) {
+  createUpsertVersion(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListVersion($datamanager: DatamanagerInput) {
+  listVersions(datamanager: $datamanager) {
+    count
+    results {
+      id
+      draft
+      localizedPlatform
+      appName
+      version
+      released
+      insertedAt
+    }
+  }
+}
+
+query EditVersion($id: ID!) {
+  editVersion(id: $id) {
+    id
+    draft
+    platform
+    appName
+    version
+    released
+    changes
+  }
+}

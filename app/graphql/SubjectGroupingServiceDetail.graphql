@@ -1,0 +1,10 @@
+query ListSubjectGroupingServiceDetailDropdown($datamanager: DatamanagerInput) {
+  listSubjectGroupingServiceDetails(datamanager: $datamanager) {
+    count
+    results {
+      id
+      serviceDetailId
+      serviceNameCalc
+    }
+  }
+}

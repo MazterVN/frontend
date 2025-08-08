@@ -1,0 +1,59 @@
+query ListDaysOfWeek($language: Language, $datamanager: DatamanagerInput) {
+  listDaysOfWeeks(datamanager: $datamanager, language: $language) {
+    count
+    results {
+      id
+      value
+      insertedAt
+    }
+  }
+}
+
+query ListDaysOfWeekDropdown($language: Language, $datamanager: DatamanagerInput) {
+  listDaysOfWeeks(datamanager: $datamanager, language: $language) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+query EditDaysOfWeek($id: ID!) {
+  editDaysOfWeek(id: $id) {
+    id
+    name
+    language
+    sortOrder
+    daysOfWeeks {
+      id
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedDaysOfWeek($input: CreateRelatedDaysOfWeekInput!) {
+  createRelatedDaysOfWeek(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedDaysOfWeek($id: ID!, $input: UpdateRelatedDaysOfWeekInput!) {
+  updateRelatedDaysOfWeek(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

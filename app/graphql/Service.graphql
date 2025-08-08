@@ -1,0 +1,107 @@
+mutation CreateRelatedUpsertService($input: CreateRelatedUpsertServiceInput!) {
+  createRelatedUpsertService(input: $input) {
+    errors {
+      fields
+      message
+    }
+    result {
+      id
+    }
+  }
+}
+query EditService($id: ID) {
+  editService(id: $id) {
+    id
+    name
+    description
+    beginsAt
+    endsAt
+    type
+    studyYearId
+    serviceDetails {
+      id
+      serviceNameId
+    }
+    serviceFees {
+      id
+      monthRepeat
+      price
+      fixedDiscount
+    }
+  }
+}
+
+query ListServiceSetting($datamanager: DatamanagerInput) {
+  listServices(datamanager: $datamanager) {
+    count
+    results {
+      ...ServiceSetting
+    }
+  }
+}
+
+query ListServiceNameSetting(
+  $language: Language
+  $datamanager: DatamanagerInput
+) {
+  listServiceNames(datamanager: $datamanager, language: $language) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+fragment ServiceSetting on Services {
+  id
+  name
+  description
+  beginsAt
+  endsAt
+  type
+  localizedType
+  studyYearId
+  studyYearLocalized
+  insertedAt
+}
+
+fragment ServiceForm on Services {
+  id
+  name
+  description
+  beginsAt
+  endsAt
+  type
+  studyYearId
+  serviceDetails {
+    id
+    serviceNameId
+  }
+  serviceFees {
+    id
+    monthRepeat
+    price
+    fixedDiscount
+  }
+}
+
+query ListServiceDropdown($datamanager: DatamanagerInput) {
+  listServices(datamanager: $datamanager) {
+    count
+    results {
+      id
+      name
+    }
+  }
+}
+
+query ListServiceDetailDropdown($datamanager: DatamanagerInput) {
+  listServiceDetails(datamanager: $datamanager) {
+    count
+    results {
+      id
+      serviceNameCalc
+    }
+  }
+}

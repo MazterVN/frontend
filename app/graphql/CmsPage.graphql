@@ -1,0 +1,33 @@
+mutation CreateUpsertCmsPage($input: CreateUpsertCmsPageInput!) {
+  createUpsertCmsPage(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListCmsPage($datamanager: DatamanagerInput) {
+  listCmsPages(datamanager: $datamanager) {
+    count
+    results {
+      id
+      title
+      slug
+      markdown
+      insertedAt
+    }
+  }
+}
+
+query EditCmsPage($id: ID!) {
+  editCmsPage(id: $id) {
+    id
+    title
+    slug
+    markdown
+  }
+}

@@ -1,0 +1,56 @@
+query ListBestPractice($datamanager: DatamanagerInput) {
+  listBestPractice(datamanager: $datamanager) {
+    count
+    results {
+      id
+      name
+      description
+      passedGpa
+      insertedAt
+    }
+  }
+}
+
+query EditBestPractice($id: ID!) {
+  editBestPractice(id: $id) {
+    id
+    name
+    description
+    passedGpa
+    bestPractices {
+      id
+      startCondOp
+      startCondValue
+      endCondOp
+      endCondValue
+      gradeLevelId
+    }
+  }
+}
+
+mutation CreateRelatedBestPractice($input: CreateRelatedBestPracticeInput!) {
+  createRelatedBestPractice(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedBestPractice(
+  $id: ID!
+  $input: UpdateRelatedBestPracticeInput!
+) {
+  updateRelatedBestPractice(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

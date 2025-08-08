@@ -1,0 +1,66 @@
+query ListParentDropdown($datamanager: DatamanagerInput) {
+  listParents(datamanager: $datamanager) {
+    count
+    results {
+      id
+      nameCalc
+    }
+  }
+}
+
+mutation CreateUpsertParent($input: CreateUpsertParentInput!) {
+  createUpsertParent(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListParent($datamanager: DatamanagerInput) {
+  listParents(datamanager: $datamanager) {
+    count
+    results {
+      id
+      name
+      latin
+      job
+      tel
+      localizedType
+      localizedJob
+      insertedAt
+    }
+  }
+}
+
+query EditParent($id: ID!) {
+  editParent(id: $id) {
+    id
+    name
+    latin
+    type
+    job
+    tel
+    studentServices {
+      id
+      studyYear {
+        nameLocalized
+      }
+      serviceName {
+        nameLocalized
+      }
+      student {
+        id
+        name
+        latin
+        i18nGender {
+          nameLocalized
+        }
+        s3ProfileUri
+      }
+    }
+  }
+}

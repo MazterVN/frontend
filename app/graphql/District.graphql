@@ -1,0 +1,64 @@
+query ListDistrict($datamanager: DatamanagerInput) {
+  listDistricts(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      province {
+        value
+      }
+      insertedAt
+    }
+  }
+}
+
+query ListDistrictDropdown($datamanager: DatamanagerInput) {
+  listDistricts(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      nameWithHelper
+    }
+  }
+}
+
+query EditDistrict($id: ID!) {
+  editDistrict(id: $id) {
+    id
+    name
+    language
+    provinceId
+    districts {
+      id
+      provinceId
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedDistrict($input: CreateRelatedDistrictInput!) {
+  createRelatedDistrict(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedDistrict($id: ID!, $input: UpdateRelatedDistrictInput!) {
+  updateRelatedDistrict(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

@@ -1,0 +1,91 @@
+query ExportScoreMonthlyCertificate(
+    $studyYearId: ID!
+    $serviceDetailIds: [ID!]!
+    $monthsOfYearId: ID!
+    $subjectGroupingId: ID!
+) {
+    exportScoreMonthlyCertificate(
+        isActive: true
+        studyYearId: $studyYearId
+        serviceDetailIds: $serviceDetailIds
+        monthsOfYearId: $monthsOfYearId
+        subjectGroupingId: $subjectGroupingId
+    )
+}
+
+query ExportScoreMonthlyTranscript(
+    $studyYearId: ID!
+    $serviceDetailIds: [ID!]!
+    $monthsOfYearId: ID!
+    $subjectGroupingId: ID!
+) {
+    exportScoreMonthlyTranscript(
+        isActive: true
+        studyYearId: $studyYearId
+        serviceDetailIds: $serviceDetailIds
+        monthsOfYearId: $monthsOfYearId
+        subjectGroupingId: $subjectGroupingId
+    )
+}
+
+query ExportScoreMonthlyRankingTable(
+    $studyYearId: ID!
+    $serviceDetailIds: [ID!]!
+    $monthsOfYearId: ID!
+    $format: ReportFormat
+    $subjectGroupingId: ID!
+) {
+    exportScoreMonthlyRankingTable(
+        isActive: true
+        studyYearId: $studyYearId
+        serviceDetailIds: $serviceDetailIds
+        monthsOfYearId: $monthsOfYearId
+        format: $format
+        subjectGroupingId: $subjectGroupingId
+    )
+}
+
+query ExportScoreMonthlyCheckList(
+    $subjectGroupingId: ID!
+    $studyYearId: ID!
+    $serviceDetailIds: [ID!]!
+    $monthsOfYearId: ID!
+) {
+    exportScoreMonthlyCheckList(
+        isActive: true
+        subjectGroupingId: $subjectGroupingId
+        studyYearId: $studyYearId
+        serviceDetailIds: $serviceDetailIds
+        monthsOfYearId: $monthsOfYearId
+    )
+}
+
+query ExportScoreMonthlyCheckListTemplate(
+    $subjectGroupingId: ID!
+    $studyYearId: ID!
+    $serviceDetailIds: [ID!]!
+    $monthsOfYearId: ID!
+) {
+    exportScoreMonthlyCheckListTemplate(
+        isActive: true
+        subjectGroupingId: $subjectGroupingId
+        studyYearId: $studyYearId
+        serviceDetailIds: $serviceDetailIds
+        monthsOfYearId: $monthsOfYearId
+    )
+}
+
+query ExportScoreMonthlyHonorList(
+    $subjectGroupingId: ID!
+    $studyYearId: ID!
+    $serviceDetailIds: [ID!]!
+    $monthsOfYearId: ID!
+) {
+    exportScoreMonthlyHonorList(
+        isActive: true
+        subjectGroupingId: $subjectGroupingId
+        studyYearId: $studyYearId
+        serviceDetailIds: $serviceDetailIds
+        monthsOfYearId: $monthsOfYearId
+    )
+}

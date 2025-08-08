@@ -1,0 +1,60 @@
+mutation CreateRelatedUpsertCmsBlog($input: CreateRelatedUpsertCmsBlogInput!) {
+  createRelatedUpsertCmsBlog(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListCmsBlog($datamanager: DatamanagerInput) {
+  listCmsBlogs(datamanager: $datamanager) {
+    count
+    results {
+      id
+      title
+      slug
+      thumbnail {
+        uri
+      }
+      compartmentLocalized
+      categoryLocalized
+      durationLocalized
+      authorName
+      authorPicture
+      authorEmailOrPhone
+      insertedAt
+    }
+  }
+}
+
+
+query EditCmsBlog($id: ID!) {
+  editCmsBlog(id: $id) {
+    id
+    title
+    slug
+    compartment
+    category
+    markdown
+    thumbnails {
+      id
+      bucket
+      key
+      name
+      namespace
+      uri
+    }
+    attachments {
+      id
+      bucket
+      key
+      name
+      namespace
+      uri
+    }
+  }
+}

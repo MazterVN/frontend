@@ -1,0 +1,79 @@
+query ExportScoreSemesterList(
+    $gradeScoreTemplateId: ID!
+    $serviceDetailId: ID!
+    $subjectGroupingId: ID!
+) {
+    exportScoreSemesterList(
+        gradeScoreTemplateId: $gradeScoreTemplateId
+        serviceDetailId: $serviceDetailId
+        subjectGroupingId: $subjectGroupingId
+        isActive: true
+    )
+}
+
+query ExportScoreSemesterListSummary(
+    $gradeScoreTemplateId: ID!
+    $serviceDetailId: ID!
+    $subjectGroupingId: ID!
+    $format: ReportFormat
+) {
+    exportScoreSemesterListSummary(
+        gradeScoreTemplateId: $gradeScoreTemplateId
+        serviceDetailId: $serviceDetailId
+        subjectGroupingId: $subjectGroupingId
+        format: $format
+        isActive: true
+    )
+}
+
+query ExportScoreSemesterCertificate(
+    $gradeScoreTemplateId: ID!
+    $serviceDetailId: ID!
+    $subjectGroupingId: ID!
+) {
+    exportScoreSemesterCertificate(
+        gradeScoreTemplateId: $gradeScoreTemplateId
+        serviceDetailId: $serviceDetailId
+        subjectGroupingId: $subjectGroupingId
+        isActive: true
+    )
+}
+
+query ExportScoreSemesterCertificateFormal(
+    $gradeScoreTemplateId: ID!
+    $serviceDetailId: ID!
+    $subjectGroupingId: ID!
+) {
+    exportScoreSemesterCertificateFormal(
+        gradeScoreTemplateId: $gradeScoreTemplateId
+        serviceDetailId: $serviceDetailId
+        subjectGroupingId: $subjectGroupingId
+        isActive: true
+    )
+}
+
+query ExportScoreSemesterTranscript(
+    $gradeScoreTemplateId: ID!
+    $serviceDetailId: ID!
+    $subjectGroupingId: ID!
+) {
+    exportScoreSemesterTranscript(
+        gradeScoreTemplateId: $gradeScoreTemplateId
+        serviceDetailId: $serviceDetailId
+        subjectGroupingId: $subjectGroupingId
+        isActive: true
+    )
+}
+
+query ExportScoreSemesterHonorList(
+    $gradeScoreTemplateId: ID!
+    $serviceDetailId: ID!
+    $subjectGroupingId: ID!
+) {
+    exportScoreSemesterHonorList(
+        gradeScoreTemplateId: $gradeScoreTemplateId
+        serviceDetailId: $serviceDetailId
+        subjectGroupingId: $subjectGroupingId
+        isActive: true
+    )
+}

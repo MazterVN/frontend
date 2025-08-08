@@ -1,0 +1,11 @@
+mutation BatchUpdateGradeScore($id: ID!, $input: BatchUpdateGradeScoreInput!) {
+  batchUpdateGradeScore(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

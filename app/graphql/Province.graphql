@@ -1,0 +1,58 @@
+query ListProvince($datamanager: DatamanagerInput) {
+  listProvinces(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      insertedAt
+    }
+  }
+}
+
+query ListProvinceDropdown($datamanager: DatamanagerInput) {
+  listProvinces(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+query EditProvince($id: ID!) {
+  editProvince(id: $id) {
+    id
+    name
+    language
+    provinces {
+      id
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedProvince($input: CreateRelatedProvinceInput!) {
+  createRelatedProvince(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedProvince($id: ID!, $input: UpdateRelatedProvinceInput!) {
+  updateRelatedProvince(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

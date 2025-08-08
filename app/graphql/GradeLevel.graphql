@@ -1,0 +1,65 @@
+query ListGradeLevel($language: Language, $datamanager: DatamanagerInput) {
+  listGradeLevels(datamanager: $datamanager, language: $language) {
+    count
+    results {
+      id
+      value
+      insertedAt
+    }
+  }
+}
+
+query ListGradeLevelDropdown(
+  $language: Language
+  $datamanager: DatamanagerInput
+) {
+  listGradeLevels(datamanager: $datamanager, language: $language) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+query EditGradeLevel($id: ID!) {
+  editGradeLevel(id: $id) {
+    id
+    name
+    language
+    sortOrder
+    gradeLevels {
+      id
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedGradeLevel($input: CreateRelatedGradeLevelInput!) {
+  createRelatedGradeLevel(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedGradeLevel(
+  $id: ID!
+  $input: UpdateRelatedGradeLevelInput!
+) {
+  updateRelatedGradeLevel(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

@@ -1,0 +1,9 @@
+query ListSubjectGroupingDetailDropdown($datamanager: DatamanagerInput) {
+  listSubjectGroupingDetails(datamanager: $datamanager) {
+    count
+    results {
+      id
+      fullSubjectCalc
+    }
+  }
+}

@@ -1,0 +1,66 @@
+query ListGradeScoreTemplate($datamanager: DatamanagerInput) {
+  listGradeScoreTemplates(datamanager: $datamanager) {
+    count
+    results {
+      id
+      subjectGroupingId
+      subjectGrouping {
+        studyYear {
+          value
+        }
+      }
+      name
+      nameEn
+      note
+      insertedAt
+    }
+  }
+}
+
+query EditGradeScoreTemplate($id: ID!) {
+  editGradeScoreTemplate(id: $id) {
+    id
+    name
+    nameEn
+    note
+    subjectGroupingId
+    subjectGrouping {
+      studyYearId
+    }
+    gradeScoreTemplateDetails {
+      id
+      monthsOfYearId
+      type
+      sortOrder
+    }
+  }
+}
+
+mutation CreateRelatedGradeScoreTemplate(
+  $input: CreateRelatedGradeScoreTemplateInput!
+) {
+  createRelatedGradeScoreTemplate(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedGradeScoreTemplate(
+  $id: ID!
+  $input: UpdateRelatedGradeScoreTemplateInput!
+) {
+  updateRelatedGradeScoreTemplate(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

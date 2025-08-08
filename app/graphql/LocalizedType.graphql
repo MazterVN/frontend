@@ -1,0 +1,317 @@
+query AttachmentTypeType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: ATTACHMENT_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListEnrollmentStateType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: ENROLLMENT_STATE_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+query ListExamType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: EXAM_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+query ListPlatformType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: PLATFORM_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListAttendanceType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: ATTENDANCE_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedBlogCompartmentType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { in: [BLOG_COMPARTMENT_TYPE] } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedParentType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { in: [PARENT_TYPE] } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedJobType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { in: [JOB_TYPE] } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedBlogCategoryType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { in: [BLOG_CATEGORY_TYPE] } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedAddressType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { in: [ADDRESS_TYPE] } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedServiceLogType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { in: [STUDENT_SERVICE_LOG_TYPE] } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedShiftType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { in: [SHIFT_TYPE] } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedContactType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { in: [CONTACT_TYPE] } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedS3BucketFolderType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { in: [PKS_NAS] } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+query ListLocalizedS3BucketType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: S3_BUCKET_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedType($datamanager: DatamanagerInput) {
+  listLocalizedType(datamanager: $datamanager) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedGenderType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: GENDER_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListTimetableEmployeeType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: TIMETABLE_EMPLOYEE_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedEmployeeRoleType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: EMPLOYEE_ROLE_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedServiceTypes($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: SERVICE_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedCurrencySymbolTypes($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: CURRENCY_SYMBOL_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedImagePropertySettingUseWithType(
+  $datamanager: DatamanagerInput
+) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: IMAGE_PROPERTY_USE_WITH_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}
+
+query ListLocalizedIntervalModeType($datamanager: DatamanagerInput) {
+  listLocalizedType(
+    datamanager: $datamanager
+    filter: { namespace: { eq: INTERVAL_MODE_TYPE } }
+  ) {
+    count
+    results {
+      id
+      valueUpper
+      text
+    }
+  }
+}

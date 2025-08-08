@@ -1,0 +1,77 @@
+query ListEnrollmentSettings($datamanager: DatamanagerInput) {
+  listEnrollmentSettings(datamanager: $datamanager) {
+    count
+    results {
+      id
+      name
+      sourceStudyYear {
+        nameLocalized
+      }
+      destinationStudyYear {
+        nameLocalized
+      }
+      sourceStudyYear {
+        nameLocalized
+      }
+      seatDatetimeStart
+      seatDatetimeEnd
+      insertedAt
+    }
+  }
+}
+
+query EditEnrollmentSetting($id: ID!) {
+  editEnrollmentSetting(id: $id) {
+    id
+    sourceStudyYearId
+    destinationStudyYearId
+    name
+    seatDatetimeStart
+    seatDatetimeEnd
+    enrollmentSettingSources {
+      id
+      studyYearId
+      subjectGroupingId
+      serviceDetailId
+    }
+    enrollmentSettingDestinations {
+      id
+      academicDiscipline
+      buildingRoomId
+      maxSeat
+      serviceDetailId
+      serviceNameCalc
+      studyYearId
+      subjectGroupingId
+    }
+  }
+}
+
+mutation CreateRelatedEnrollmentSetting(
+  $input: CreateRelatedEnrollmentSettingInput!
+) {
+  createRelatedEnrollmentSetting(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedEnrollmentSetting(
+  $id: ID!
+  $input: UpdateRelatedEnrollmentSettingInput!
+) {
+  updateRelatedEnrollmentSetting(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

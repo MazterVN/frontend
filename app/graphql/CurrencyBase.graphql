@@ -1,0 +1,36 @@
+query ListCurrencyBase($datamanager: DatamanagerInput) {
+  listCurrencyBases(datamanager: $datamanager) {
+    count
+    results {
+      id
+      currency {
+        symbol
+        flag
+      }
+    }
+  }
+}
+
+query EditCurrencyBase($id: ID!) {
+  editCurrencyBase(id: $id) {
+    id
+    currencyId
+    currencyRates {
+      id
+      currencyId
+      rate
+    }
+  }
+}
+
+mutation CreateUpsertCurrencyBase($input: CreateUpsertCurrencyBaseInput!) {
+  createUpsertCurrencyBase(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

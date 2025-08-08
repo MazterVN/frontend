@@ -1,0 +1,18 @@
+query ReadOneCurrentEnrollmentStudyYear {
+  readOneCurrentEnrollmentStudyYear {
+    id
+    sourceStudyYearId
+    destinationStudyYearId
+  }
+}
+
+mutation CreateUpsertCurrentEnrollmentStudyYear(
+  $input: CreateUpsertCurrentEnrollmentStudyYearInput!
+) {
+  createUpsertCurrentEnrollmentStudyYear(input: $input) {
+    errors {
+      fields
+      message
+    }
+  }
+}

@@ -1,0 +1,59 @@
+query ListRelative($language: Language, $datamanager: DatamanagerInput) {
+  listRelatives(datamanager: $datamanager, language: $language) {
+    count
+    results {
+      id
+      value
+      insertedAt
+    }
+  }
+}
+
+query ListRelativeDropdown($language: Language, $datamanager: DatamanagerInput) {
+  listRelatives(datamanager: $datamanager, language: $language) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+query EditRelative($id: ID!) {
+  editRelative(id: $id) {
+    id
+    name
+    language
+    sortOrder
+    relatives {
+      id
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedRelative($input: CreateRelatedRelativeInput!) {
+  createRelatedRelative(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedRelative($id: ID!, $input: UpdateRelatedRelativeInput!) {
+  updateRelatedRelative(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

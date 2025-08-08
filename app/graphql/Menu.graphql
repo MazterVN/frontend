@@ -1,0 +1,56 @@
+query ListMenus($datamanager: DatamanagerInput) {
+  listMenus(datamanager: $datamanager) {
+    count
+    results {
+      id
+      gettextId
+    }
+  }
+}
+
+mutation CreateRelatedUpsertMenu($input: CreateRelatedUpsertMenuInput!) {
+  createRelatedUpsertMenu(input: $input) {
+    errors {
+      fields
+      message
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListRootMenu {
+  listRootMenus {
+    ...Menu
+    menus(sort: [{ field: POSITION, order: ASC }]) {
+      ...Menu
+      menus(sort: [{ field: POSITION, order: ASC }]) {
+        ...Menu
+      }
+    }
+  }
+}
+
+fragment ActiveMenuPath on ActiveMenuPath {
+  id
+  op
+  path
+}
+
+fragment Menu on Menus {
+  id
+  iconClass
+  localizedGettextId
+  position
+  gettextId
+  path
+  permissionKey
+  activePaths {
+    ...ActiveMenuPath
+  }
+  menuPermissions {
+    id
+    permissionId
+  }
+}

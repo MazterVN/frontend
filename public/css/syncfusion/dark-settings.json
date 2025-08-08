@@ -1,0 +1,31 @@
+{
+  "theme": "tailwind-dark",
+  "properties": {
+    "$primary": "rgba(235,79,39,1)",
+    "$primary-text-color": "#000",
+    "$secondary-bg-color": "#1f2937",
+    "$secondary-text-color": "#fff"
+  },
+  "components": [
+    "grid",
+    "calendar",
+    "button",
+    "button-group",
+    "drop-down-list",
+    "drop-down-tree",
+    "auto-complete",
+    "input",
+    "numerictextbox",
+    "multi-select",
+    "datepicker",
+    "daterangepicker",
+    "datetimepicker",
+    "timepicker",
+    "image-editor",
+    "document-editor",
+    "query-builder",
+    "toast",
+    "file-manager",
+    "pdfviewer"
+  ]
+}

@@ -1,0 +1,96 @@
+query GetTimetableAsTable($subjectGroupingId: ID!, $serviceDetailId: ID!) {
+  getTimetableAsTable(
+    subjectGroupingId: $subjectGroupingId
+    serviceDetailId: $serviceDetailId
+  ) {
+    id
+    subjectGroupingId
+    serviceDetailId
+    headers {
+      id
+      value
+    }
+    times {
+      id
+      startTime
+      endTime
+      days {
+        id
+        subjectGroupingId
+        subjectGroupingDetailId
+        serviceDetailId
+        daysOfWeekId
+        daysOfWeekSortOrder
+        startTime
+        endTime
+        subjectCalc
+      }
+    }
+  }
+}
+
+mutation BulkCreateUpsertTimetable($input: BulkCreateUpsertTimetableInput!) {
+  bulkCreateUpsertTimetable(input: $input) {
+    errors {
+      fields
+      message
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListTimetableEmploye($datamanager: DatamanagerInput) {
+  listTimetableEmployees(datamanager: $datamanager) {
+    count
+    results {
+      id
+      subjectGroupingDetailId
+      type
+      localizedType
+      startDate
+      endDate
+      employee {
+        id
+        name
+        latin
+        gender
+        localizedGender
+        dob
+        tel
+        type
+        localizedType
+      }
+    }
+  }
+}
+
+query ListTimetableSubjectDropdown($datamanager: DatamanagerInput) {
+  listTimetables(datamanager: $datamanager) {
+    count
+    results {
+      id
+      fullSubjectCalc
+    }
+  }
+}
+
+query ListTimetablesForEmployee($id: ID!, $dayOfWeek: Int!) {
+  listTimetables(
+    filter: {
+      daysOfWeekSortOrder: { eq: $dayOfWeek }
+      timetableEmployees: { employeeId: { eq: $id } }
+    }
+  ) {
+    count
+    results {
+      id
+      serviceNameCalc
+      daysOfWeekSortOrder
+      subjectCalc
+      startTime
+      endTime
+    }
+  }
+}

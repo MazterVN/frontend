@@ -1,0 +1,59 @@
+query ListSubject($datamanager: DatamanagerInput) {
+  listSubjects(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      insertedAt
+    }
+  }
+}
+
+query ListSubjectDropdown($datamanager: DatamanagerInput) {
+  listSubjects(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+query EditSubject($id: ID!) {
+  editSubject(id: $id) {
+    id
+    name
+    language
+    sortOrder
+    subjects {
+      id
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedSubject($input: CreateRelatedSubjectInput!) {
+  createRelatedSubject(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedSubject($id: ID!, $input: UpdateRelatedSubjectInput!) {
+  updateRelatedSubject(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

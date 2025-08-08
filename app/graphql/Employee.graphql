@@ -1,0 +1,50 @@
+query ListEmployeeDropdown($datamanager: DatamanagerInput) {
+  listEmployees(datamanager: $datamanager) {
+    count
+    results {
+      id
+      employeeCalc
+    }
+  }
+}
+
+mutation CreateUpsertEmployee($input: CreateUpsertEmployeeInput!) {
+  createUpsertEmployee(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListEmployee($datamanager: DatamanagerInput) {
+  listEmployees(datamanager: $datamanager) {
+    count
+    results {
+      id
+      name
+      latin
+      localizedGender
+      dob
+      localizedType
+      tel
+      insertedAt
+    }
+  }
+}
+
+
+query EditEmployee($id: ID!) {
+  editEmployee(id: $id) {
+    id
+    name
+    latin
+    gender
+    dob
+    type
+    tel
+  }
+}

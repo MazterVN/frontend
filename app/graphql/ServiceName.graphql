@@ -1,0 +1,58 @@
+query ListServiceName($datamanager: DatamanagerInput) {
+  listServiceNames(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      insertedAt
+    }
+  }
+}
+
+query ListServiceNameDropdown($datamanager: DatamanagerInput) {
+  listServiceNames(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+query EditServiceName($id: ID!) {
+  editServiceName(id: $id) {
+    id
+    name
+    language
+    serviceNames {
+      id
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedServiceName($input: CreateRelatedServiceNameInput!) {
+  createRelatedServiceName(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedServiceName($id: ID!, $input: UpdateRelatedServiceNameInput!) {
+  updateRelatedServiceName(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

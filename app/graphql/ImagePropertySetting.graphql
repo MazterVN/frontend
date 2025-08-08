@@ -1,0 +1,33 @@
+mutation CreateUpsertImagePropertySetting(
+  $input: CreateUpsertImagePropertySettingInput!
+) {
+  createUpsertImagePropertySetting(input: $input) {
+    errors {
+      fields
+      message
+    }
+    result {
+      id
+    }
+  }
+}
+query EditImagePropertySetting($id: ID) {
+  editImagePropertySetting(id: $id) {
+    id
+    useWith
+    width
+    height
+  }
+}
+
+query ListImagePropertySettingSetting($datamanager: DatamanagerInput) {
+  listImagePropertySettings(datamanager: $datamanager) {
+    count
+    results {
+      id
+      useWith
+      width
+      height
+    }
+  }
+}

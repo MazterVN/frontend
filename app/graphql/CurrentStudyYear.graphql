@@ -1,0 +1,19 @@
+mutation CreateUpsertCurrentStudyYear(
+  $input: CreateUpsertCurrentStudyYearInput!
+) {
+  createUpsertCurrentStudyYear(input: $input) {
+    errors {
+      fields
+      message
+    }
+    result {
+      id
+    }
+  }
+}
+query EditCurrentStudyYear {
+  readOneCurrentStudyYear {
+    id
+    studyYearId
+  }
+}

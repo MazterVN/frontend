@@ -1,0 +1,100 @@
+query ListSubjectGroupingDropdown($datamanager: DatamanagerInput) {
+  listSubjectGroupings(datamanager: $datamanager) {
+    count
+    results {
+      id
+      nameCalc
+    }
+  }
+}
+
+query ListSubjectGroupingServiceDetailDropdown($datamanager: DatamanagerInput) {
+  listSubjectGroupingServiceDetails(datamanager: $datamanager) {
+    count
+    results {
+      id
+      serviceDetailId
+      serviceNameCalc
+    }
+  }
+}
+
+query ListSubjectGroupingDetailDropdown($datamanager: DatamanagerInput) {
+  listSubjectGroupingDetails(datamanager: $datamanager) {
+    count
+    results {
+      id
+      fullSubjectCalc
+    }
+  }
+}
+
+query ListSubjectGrouping($datamanager: DatamanagerInput) {
+  listSubjectGroupings(datamanager: $datamanager) {
+    count
+    results {
+      id
+      note
+      gpa
+      studyYearId
+      studyYear {
+        value
+      }
+      insertedAt
+    }
+  }
+}
+
+query EditSubjectGrouping($id: ID!) {
+  editSubjectGrouping(id: $id) {
+    id
+    studyYearId
+    gpaConditionId
+    gpa
+    note
+    subjectGroupingServiceDetails {
+      id
+      studyYearId
+      serviceDetail {
+        serviceId
+      }
+      serviceDetailId
+    }
+    subjectGroupingDetails {
+      id
+      subjectId
+      scoreTypeId
+      maxScore
+      sortOrder
+    }
+  }
+}
+
+mutation CreateRelatedSubjectGrouping(
+  $input: CreateRelatedSubjectGroupingInput!
+) {
+  createRelatedSubjectGrouping(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedSubjectGrouping(
+  $id: ID!
+  $input: UpdateRelatedSubjectGroupingInput!
+) {
+  updateRelatedSubjectGrouping(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

@@ -1,0 +1,58 @@
+query ListServiceType($datamanager: DatamanagerInput) {
+  listServiceTypes(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      insertedAt
+    }
+  }
+}
+
+query ListServiceTypeDropdown($datamanager: DatamanagerInput) {
+  listServiceTypes(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+query EditServiceType($id: ID!) {
+  editServiceType(id: $id) {
+    id
+    name
+    language
+    serviceTypes {
+      id
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedServiceType($input: CreateRelatedServiceTypeInput!) {
+  createRelatedServiceType(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedServiceType($id: ID!, $input: UpdateRelatedServiceTypeInput!) {
+  updateRelatedServiceType(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

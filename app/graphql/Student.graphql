@@ -1,0 +1,149 @@
+query ListStudentServiceDropdown($datamanager: DatamanagerInput) {
+  listStudentServices(datamanager: $datamanager) {
+    count
+    results {
+      id
+      withStudentCalc
+    }
+  }
+}
+
+query ListStudentServiceByStudent(
+  $studentId: ID!
+  $datamanager: DatamanagerInput
+) {
+  listStudentServices(
+    datamanager: $datamanager
+    filter: { studentId: { eq: $studentId } }
+  ) {
+    count
+    results {
+      id
+      subjectGrouping {
+        id
+      }
+      serviceDetailId
+      studyYearLocalized {
+        name
+      }
+      serviceName {
+        nameLocalized
+      }
+      transferCalc
+      serviceTypeLocalized {
+        name
+      }
+      note
+      localizedShiftType
+      isActive
+    }
+  }
+}
+
+query ListStudentDropdown($datamanager: DatamanagerInput) {
+  listStudents(datamanager: $datamanager) {
+    count
+    results {
+      id
+      nameCalc
+    }
+  }
+}
+
+query EditStudent($id: ID!) {
+  editStudent(id: $id) {
+    id
+    bookId
+    name
+    latin
+    gender
+    dob
+    tel
+    contacts {
+      id
+      type
+      value
+    }
+    studentRelatives {
+      id
+      relatedStudentId
+      relativeId
+    }
+    studentParents {
+      id
+      parentId
+    }
+    studentAddresses {
+      id
+      villageId
+      studyYearId
+      type
+    }
+    studentImages {
+      id
+      uri
+    }
+  }
+}
+
+mutation CreateRelatedStudent($input: CreateRelatedStudentInput!) {
+  createRelatedStudent(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedStudent($id: ID!, $input: UpdateRelatedStudentInput!) {
+  updateRelatedStudent(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListStudent($datamanager: DatamanagerInput) {
+  listStudents(datamanager: $datamanager) {
+    count
+    results {
+      id
+      bookId
+      name
+      latin
+      localizedGender
+      studentImage {
+        uri
+      }
+      dob
+      tel
+    }
+  }
+}
+
+query ListStudentParentsByStudent($studentId: ID!) {
+  listStudentParentsByStudent(studentId: $studentId) {
+    id
+    studentId
+    parentId
+  }
+}
+
+query ListStudentParentDropdown($datamanager: DatamanagerInput) {
+  listStudentParents(datamanager: $datamanager) {
+    count
+    results {
+      id
+      parent {
+        nameLocalized
+      }
+    }
+  }
+}

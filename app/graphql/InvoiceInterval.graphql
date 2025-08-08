@@ -1,0 +1,31 @@
+mutation CreateUpsertInvoiceInterval(
+  $input: CreateUpsertInvoiceIntervalInput!
+) {
+  createUpsertInvoiceInterval(input: $input) {
+    errors {
+      fields
+      message
+    }
+    result {
+      id
+    }
+  }
+}
+query EditInvoiceInterval($id: ID) {
+  editInvoiceInterval(id: $id) {
+    id
+    day
+    mode
+  }
+}
+
+query ListInvoiceInterval($datamanager: DatamanagerInput) {
+  listInvoiceIntervals(datamanager: $datamanager) {
+    count
+    results {
+      id
+      day
+      mode
+    }
+  }
+}

@@ -1,0 +1,88 @@
+mutation SignIn($accessToken: String!) {
+    signIn(input: { accessToken: $accessToken }) {
+        errors {
+            message
+            fields
+        }
+        result {
+            id
+            profile
+            emailOrPhone
+            bucket
+            bucketFolder
+            telegramChatId
+            employeeId
+            active
+            superUser
+            currentStudyYearId
+        }
+    }
+}
+
+query GetAuthenticated($accessToken: String!) {
+    getAuthenticated(accessToken: $accessToken) {
+        id
+        profile
+        emailOrPhone
+        bucket
+        bucketFolder
+        telegramChatId
+        employeeId
+        active
+        superUser
+        currentStudyYearId
+    }
+}
+
+mutation UpdateRelatedUser($id: ID!, $input: UpdateRelatedUserInput!) {
+    updateRelatedUser(id: $id, input: $input) {
+        errors {
+            fields
+            message
+        }
+        result {
+            id
+        }
+    }
+}
+query EditUser($id: String!) {
+    editUser(id: $id) {
+        id
+        emailOrPhone
+        active
+        superUser
+        fullName
+        employeeId
+        studentId
+        bucket
+        bucketFolder
+        userRoles {
+            id
+            isDefault
+            roleId
+        }
+    }
+}
+
+query ListUser($datamanager: DatamanagerInput) {
+    listUsers(datamanager: $datamanager) {
+        count
+        results {
+            id
+            fullName
+            emailOrPhone
+            bucket
+            bucketFolder
+            superUser
+            active
+            picture
+            employee {
+                employeeCalc
+            }
+        }
+    }
+}
+
+query CurrentUserDatetime {
+    currentUserDatetime
+}

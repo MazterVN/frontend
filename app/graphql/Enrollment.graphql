@@ -1,0 +1,122 @@
+query ListEnrollment($datamanager: DatamanagerInput) {
+  listEnrollments(datamanager: $datamanager) {
+    count
+    results {
+      id
+      studentService {
+        serviceName {
+          nameLocalized
+        }
+        student {
+          name
+          latin
+          i18nGender {
+            nameLocalized
+          }
+        }
+      }
+      enrollmentSettingDestination {
+        serviceName {
+          nameLocalized
+        }
+      }
+      stateNameLocalized
+      insertedAt
+    }
+  }
+}
+
+query EditEnrollment($id: ID!) {
+  editEnrollment(id: $id) {
+    id
+    state
+    enrollmentSettingDestinationId
+    buildingRoomSeatId
+    studentServiceId
+    sourceStudyYearId
+    destinationStudyYearId
+    enrollmentStudentDrafts {
+      id
+      name
+      nameEditable
+      latin
+      latinEditable
+      dob
+      dobEditable
+      gender
+      genderEditable
+      tel
+      telEditable
+      email
+      emailEditable
+      facebook
+      facebookEditable
+      lineId
+      lineIdEditable
+    }
+    enrollmentAddressDrafts {
+      id
+      type
+      villageId
+      villageIdEditable
+    }
+    enrollmentParentDrafts {
+      id
+      name
+      nameEditable
+      latin
+      latinEditable
+      job
+      jobEditable
+      tel
+      telEditable
+      type
+      typeEditable
+    }
+    enrollmentPaymentAttachments {
+      id
+      bucket
+      key
+      type
+      namespace
+      note
+    }
+  }
+}
+
+mutation CreateRelatedEnrollment($input: CreateRelatedEnrollmentInput!) {
+  createRelatedEnrollment(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedEnrollment(
+  $id: ID!
+  $input: UpdateRelatedEnrollmentInput!
+) {
+  updateRelatedEnrollment(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListEnrollmentSettingDestinationDropdown($datamanager: DatamanagerInput) {
+  listEnrollmentSettingDestinations(datamanager: $datamanager) {
+    count
+    results {
+      id
+      destinationName
+    }
+  }
+}

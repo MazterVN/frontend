@@ -1,0 +1,165 @@
+query EditStudentService($id: ID!) {
+  editStudentService(id: $id) {
+    id
+    isActive
+    studentId
+    studyYearId
+    subjectGrouping {
+      id
+    }
+    serviceDetail {
+      serviceId
+    }
+    serviceDetailId
+    serviceTypeId
+    shiftType
+    note
+    allowEdit
+  }
+}
+
+query StudentServiceFillEnrollmentDraft($studentServiceId: ID!) {
+  studentServiceFillEnrollmentDraft(studentServiceId: $studentServiceId) {
+    students {
+      id
+      name
+      latin
+      dob
+      gender
+      tel
+      email
+      facebook
+      lineId
+      nameEditable
+      latinEditable
+      dobEditable
+      genderEditable
+      telEditable
+      emailEditable
+      facebookEditable
+      lineIdEditable
+    }
+    addresses {
+      id
+      type
+      villageId
+      villageIdEditable
+    }
+    parents {
+      id
+      job
+      latin
+      name
+      tel
+      type
+      nameEditable
+      latinEditable
+      jobEditable
+      telEditable
+      typeEditable
+    }
+  }
+}
+
+mutation CreateUpsertStudentService($input: CreateUpsertStudentServiceInput!) {
+  createUpsertStudentService(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListStudentService($datamanager: DatamanagerInput) {
+  listStudentServices(datamanager: $datamanager) {
+    count
+    results {
+      id
+      subjectGrouping {
+        id
+      }
+      isActive
+      serviceDetailId
+      studyYearLocalized {
+        name
+      }
+      serviceTypeLocalized {
+        name
+      }
+      serviceName {
+        nameLocalized
+      }
+      student {
+        id
+        name
+        latin
+        gender
+        localizedGender
+        studentImage {
+          uri
+        }
+        dob
+        tel
+      }
+    }
+  }
+}
+
+query StudentServiceExportStudentProfile(
+  $serviceDetailIds: [ID!]!
+  $studentServiceIds: [ID!]!
+) {
+  studentServiceExportStudentProfile(
+    serviceDetailIds: $serviceDetailIds
+    studentServiceIds: $studentServiceIds
+  )
+}
+
+query ListStudentServiceWithScore(
+  $subjectGroupingId: ID!
+  $serviceDetailIds: [ID!]!
+  $subjectGroupingDetailIds: [ID!]!
+  $monthsOfYearId: ID!
+) {
+  listStudentServiceWithScore(
+    subjectGroupingId: $subjectGroupingId
+    serviceDetailIds: $serviceDetailIds
+    subjectGroupingDetailIds: $subjectGroupingDetailIds
+    monthsOfYearId: $monthsOfYearId
+    withPreparation: true
+  ) {
+    count
+    results {
+      id
+      newTotalScore
+      newGpa
+      newRank
+      student {
+        name
+        latin
+        s3ProfileUri
+      }
+      scores {
+        id
+        score
+        maxScore
+        fullSubjectCalc
+      }
+    }
+  }
+}
+
+mutation CreateStudentServiceTransfer(
+  $input: CreateStudentServiceTransferInput!
+) {
+  createStudentServiceTransfer(input: $input) {
+    id
+  }
+}
+
+mutation BatchUpgradeStudentService($input: BatchUpgradeStudentServiceInput!) {
+  batchUpgradeStudentService(input: $input)
+}

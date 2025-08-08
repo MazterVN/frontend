@@ -1,0 +1,66 @@
+query ListStudentNote($datamanager: DatamanagerInput) {
+  listStudentNotes(datamanager: $datamanager) {
+    count
+    results {
+      id
+      title
+      noteAt
+      insertedAt
+    }
+  }
+}
+
+query EditStudentNote($id: ID!) {
+  editStudentNote(id: $id) {
+    id
+    title
+    note
+    noteAt
+    attachments {
+      id
+      bucket
+      key
+      type
+      namespace
+    }
+    studentNoteStudentServices {
+      id
+      studentServiceId
+    }
+    studentNoteStudentParents {
+      id
+      studentParentId
+    }
+    studentNoteEmployees {
+      id
+      employeeId
+    }
+  }
+}
+
+mutation CreateRelatedStudentNote($input: CreateRelatedStudentNoteInput!) {
+  createRelatedStudentNote(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedStudentNote(
+  $id: ID!
+  $input: UpdateRelatedStudentNoteInput!
+) {
+  updateRelatedStudentNote(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

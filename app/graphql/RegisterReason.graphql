@@ -1,0 +1,58 @@
+query ListRegisterReason($datamanager: DatamanagerInput) {
+  listRegisterReasons(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      insertedAt
+    }
+  }
+}
+
+query ListRegisterReasonDropdown($datamanager: DatamanagerInput) {
+  listRegisterReasons(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+query EditRegisterReason($id: ID!) {
+  editRegisterReason(id: $id) {
+    id
+    name
+    language
+    registerReasons {
+      id
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedRegisterReason($input: CreateRelatedRegisterReasonInput!) {
+  createRelatedRegisterReason(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedRegisterReason($id: ID!, $input: UpdateRelatedRegisterReasonInput!) {
+  updateRelatedRegisterReason(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

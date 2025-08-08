@@ -1,0 +1,66 @@
+query ListGpaCondition($datamanager: DatamanagerInput) {
+  listGpaConditions(datamanager: $datamanager) {
+    count
+    results {
+      id
+      name
+      description
+      passedGpa
+      insertedAt
+    }
+  }
+}
+
+query ListGpaConditionDropdown($datamanager: DatamanagerInput) {
+  listGpaConditions(datamanager: $datamanager) {
+    count
+    results {
+      id
+      name
+    }
+  }
+}
+
+query EditGpaCondition($id: ID!) {
+  editGpaCondition(id: $id) {
+    id
+    name
+    description
+    passedGpa
+    gpaConditionDetails {
+      id
+      startCondOp
+      startCondValue
+      endCondOp
+      endCondValue
+      gradeLevelId
+    }
+  }
+}
+
+mutation CreateRelatedGpaCondition($input: CreateRelatedGpaConditionInput!) {
+  createRelatedGpaCondition(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedGpaCondition(
+  $id: ID!
+  $input: UpdateRelatedGpaConditionInput!
+) {
+  updateRelatedGpaCondition(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

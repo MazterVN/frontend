@@ -1,0 +1,17 @@
+name = "sms-web"
+pages_build_output_dir = "./dist"
+compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2024-09-23"
+
+[vars]
+GQL_HOST = "https://sms.cloudware.com.kh/gql"
+NUXT_OAUTH_AUTH0_AUDIENCE = "https://sms.cloudware.com.kh"
+NUXT_OAUTH_AUTH0_DOMAIN = "pks.jp.auth0.com"
+NUXT_PUBLIC_API_HOST = "https://sms.cloudware.com.kh"
+NUXT_PUBLIC_GQL_HOST = "https://sms.cloudware.com.kh/gql"
+NUXT_PUBLIC_IMAGE_CDN = "https://image.pks.edu.kh"
+NUXT_PUBLIC_S3_SERVER = "https://s3.pks.edu.kh"
+NUXT_PUBLIC_TELEGRAM_BOT_USERNAME = "PKSMedia_Bot"
+NUXT_PUBLIC_WS_HOST = "wss://sms.cloudware.com.kh"
+NUXT_PUBLIC_PLACEHOLDER_IMG = "https://image.pks.edu.kh/placeholder.png"
+NUXT_PUBLIC_REDIRECT_URL = "https://sms.pks.edu.kh/confirm"

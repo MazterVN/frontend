@@ -1,0 +1,31 @@
+mutation CreateUpsertSubscriptionInterval(
+  $input: CreateUpsertSubscriptionIntervalInput!
+) {
+  createUpsertSubscriptionInterval(input: $input) {
+    errors {
+      fields
+      message
+    }
+    result {
+      id
+    }
+  }
+}
+query EditSubscriptionInterval($id: ID) {
+  editSubscriptionInterval(id: $id) {
+    id
+    day
+    mode
+  }
+}
+
+query ListSubscriptionInterval($datamanager: DatamanagerInput) {
+  listSubscriptionIntervals(datamanager: $datamanager) {
+    count
+    results {
+      id
+      day
+      mode
+    }
+  }
+}

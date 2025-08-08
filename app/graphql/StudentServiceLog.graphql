@@ -1,0 +1,45 @@
+query EditStudentServiceLog($id: ID!) {
+  editStudentServiceLog(id: $id) {
+    id
+    studentServiceId
+    date
+    type
+    reasons {
+      id
+      dropReasonId
+      registerReasonId
+    }
+  }
+}
+
+mutation CreateRelatedUpsertStudentServiceLog(
+  $input: CreateRelatedUpsertStudentServiceLogInput!
+) {
+  createRelatedUpsertStudentServiceLog(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListStudentServiceLog(
+  $datamanager: DatamanagerInput
+  $studentServiceId: ID!
+) {
+  listStudentServiceLogs(
+    datamanager: $datamanager
+    filter: { studentServiceId: { eq: $studentServiceId } }
+  ) {
+    count
+    results {
+      id
+      date
+      typeValue
+      calcName
+    }
+  }
+}

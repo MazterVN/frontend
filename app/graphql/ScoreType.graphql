@@ -1,0 +1,59 @@
+query ListScoreType($language: Language, $datamanager: DatamanagerInput) {
+  listScoreTypes(datamanager: $datamanager, language: $language) {
+    count
+    results {
+      id
+      value
+      insertedAt
+    }
+  }
+}
+
+query ListScoreTypeDropdown($language: Language, $datamanager: DatamanagerInput) {
+  listScoreTypes(datamanager: $datamanager, language: $language) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+query EditScoreType($id: ID!) {
+  editScoreType(id: $id) {
+    id
+    name
+    language
+    sortOrder
+    scoreTypes {
+      id
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedScoreType($input: CreateRelatedScoreTypeInput!) {
+  createRelatedScoreType(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedScoreType($id: ID!, $input: UpdateRelatedScoreTypeInput!) {
+  updateRelatedScoreType(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

@@ -1,0 +1,48 @@
+mutation CreateRelatedUpsertTimetableEmployee($input: CreateRelatedUpsertTimetableEmployeeInput!) {
+  createRelatedUpsertTimetableEmployee(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+query ListTimetableEmployee($datamanager: DatamanagerInput) {
+  listTimetableEmployees(datamanager: $datamanager) {
+    count
+    results {
+      id
+      subjectGroupingDetailId
+      localizedType
+      startDate
+      endDate
+      employee {
+        id
+        name
+        latin
+        localizedGender
+        tel
+        localizedType
+      }
+      insertedAt
+    }
+  }
+}
+
+
+query EditTimetableEmployee($id: ID!) {
+  editTimetableEmployee(id: $id) {
+    id
+    timetableEmployeeTimetables {
+      id
+      timetableId
+    }
+    employeeId
+    type
+    startDate
+    endDate
+  }
+}

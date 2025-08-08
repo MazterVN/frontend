@@ -1,0 +1,67 @@
+query ListStudyYear($language: Language, $datamanager: DatamanagerInput) {
+  listStudyYears(datamanager: $datamanager, language: $language) {
+    count
+    results {
+      id
+      beginsAt
+      endsAt
+      value
+      insertedAt
+    }
+  }
+}
+
+query ListStudyYearDropdown($datamanager: DatamanagerInput) {
+  listStudyYears(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+    }
+  }
+}
+
+query EditStudyYear($id: ID!) {
+  editStudyYear(id: $id) {
+    id
+    name
+    language
+    beginsAt
+    endsAt
+    studyYears {
+      id
+      name
+      language
+      languageValue
+      beginsAt
+      endsAt
+    }
+  }
+}
+
+mutation CreateRelatedStudyYear($input: CreateRelatedStudyYearInput!) {
+  createRelatedStudyYear(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedStudyYear(
+  $id: ID!
+  $input: UpdateRelatedStudyYearInput!
+) {
+  updateRelatedStudyYear(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

@@ -1,0 +1,70 @@
+query ListVillage($datamanager: DatamanagerInput) {
+  listVillages(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      commune {
+        value
+        district {
+          value
+          province {
+            value
+          }
+        }
+      }
+      insertedAt
+    }
+  }
+}
+
+query ListVillageDropdown($datamanager: DatamanagerInput) {
+  listVillages(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      addressName
+    }
+  }
+}
+
+query EditVillage($id: ID!) {
+  editVillage(id: $id) {
+    id
+    communeId
+    name
+    language
+    villages {
+      id
+      communeId
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedVillage($input: CreateRelatedVillageInput!) {
+  createRelatedVillage(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedVillage($id: ID!, $input: UpdateRelatedVillageInput!) {
+  updateRelatedVillage(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}

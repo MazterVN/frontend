@@ -1,0 +1,32 @@
+query ListCurrency($datamanager: DatamanagerInput) {
+  listCurrencies(datamanager: $datamanager) {
+    count
+    results {
+      ...Currency
+    }
+  }
+}
+
+query EditCurrency($id: ID!) {
+  editCurrency(id: $id) {
+    ...Currency
+  }
+}
+
+mutation CreateUpsertCurrency($input: CreateUpsertCurrencyInput!) {
+  createUpsertCurrency(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+fragment Currency on Currencies {
+  id
+  symbol
+  flag
+}

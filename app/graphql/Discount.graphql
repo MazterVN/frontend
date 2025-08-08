@@ -1,0 +1,40 @@
+mutation CreateRelatedUpsertDiscount(
+  $input: CreateRelatedUpsertDiscountInput!
+) {
+  createRelatedUpsertDiscount(input: $input) {
+    errors {
+      fields
+      message
+    }
+    result {
+      id
+    }
+  }
+}
+query EditDiscount($id: ID) {
+  editDiscount(id: $id) {
+    id
+    startsAt
+    expiresAt
+    value
+    description
+    studentServiceDiscounts {
+      id
+      studentServiceId
+    }
+  }
+}
+
+query ListDiscount($datamanager: DatamanagerInput) {
+  listDiscounts(datamanager: $datamanager) {
+    count
+    results {
+      id
+      valueCalc
+      description
+      startsAt
+      expiresAt
+      limitUsageCalc
+    }
+  }
+}

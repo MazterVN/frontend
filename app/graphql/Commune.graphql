@@ -1,0 +1,67 @@
+query ListCommune($datamanager: DatamanagerInput) {
+  listCommunes(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      district {
+        value
+        province {
+          value
+        }
+      }
+      insertedAt
+    }
+  }
+}
+
+query ListCommuneDropdown($datamanager: DatamanagerInput) {
+  listCommunes(datamanager: $datamanager) {
+    count
+    results {
+      id
+      value
+      nameWithHelper
+    }
+  }
+}
+
+query EditCommune($id: ID!) {
+  editCommune(id: $id) {
+    id
+    districtId
+    name
+    language
+    communes {
+      id
+      districtId
+      name
+      language
+      languageValue
+    }
+  }
+}
+
+mutation CreateRelatedCommune($input: CreateRelatedCommuneInput!) {
+  createRelatedCommune(input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
+
+mutation UpdateRelatedCommune($id: ID!, $input: UpdateRelatedCommuneInput!) {
+  updateRelatedCommune(id: $id, input: $input) {
+    errors {
+      message
+      fields
+    }
+    result {
+      id
+    }
+  }
+}
