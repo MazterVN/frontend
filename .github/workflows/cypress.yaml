@@ -168,10 +168,7 @@ jobs:
       #     mix phx.server > backend.log 2>&1 &
       #     echo $! > phoenix.pid
       - name: Start Backend
-        run: |
-          mix ecto.create
-          mix ecto.migrate
-          mix phx.server > backend.log 2>&1 &
+        run: mix phx.server > backend.log 2>&1 &
 
       - name: Debug Log if Fail
         if: failure()
