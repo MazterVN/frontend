@@ -109,7 +109,7 @@ jobs:
       - name: Checkout backend repo
         uses: actions/checkout@v4
         with:
-          repository: nakvanna/backend-for-test
+          repository: MazterVN/backend
           token: ${{ secrets.BACKEND_TOKEN }}
           path: backend
 
